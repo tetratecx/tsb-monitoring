@@ -1,12 +1,9 @@
-# namespace: tsb-monitoring
-createNamespace: true
-
 grafana:
   replicas: 1
   image:
     repository: grafana/grafana
     tag: 9.1.7
-  # Additional Grafana configurations
+  
 
 prometheus:
   replicas: 1
