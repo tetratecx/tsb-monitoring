@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.grafana.replicas }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: grafana
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: grafana
-          image: "{{ .Values.grafana.image.repository }}:{{ .Values.grafana.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - name: grafana
               containerPort: 3000

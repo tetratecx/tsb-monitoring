@@ -1,20 +1,15 @@
-namespace: tsb-monitoring
+# namespace: tsb-monitoring
 createNamespace: true
-
-prometheus:
-  replicas: 1
-  image:
-    repository: prom/prometheus
-    tag: v2.44.0
-  storage:
-    size: 10Gi
-  serviceAccount: tsb-prometheus
 
 grafana:
   replicas: 1
   image:
     repository: grafana/grafana
     tag: 9.1.7
-  service:
-    type: ClusterIP
-    port: 3000
+  # Additional Grafana configurations
+
+prometheus:
+  replicas: 1
+  image:
+    repository: prom/prometheus
+    tag: v2.44.0

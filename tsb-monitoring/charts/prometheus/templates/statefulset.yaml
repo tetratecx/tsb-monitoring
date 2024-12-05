@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: prometheus
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.prometheus.replicas }}
+  replicas: {{ .Values.replicas }}
   serviceName: prometheus-server
   selector:
     matchLabels:
@@ -18,10 +18,10 @@ spec:
         runAsUser: 1000
         fsGroup: 2000
         runAsNonRoot: true
-      serviceAccountName: {{ .Values.prometheus.serviceAccount }}
+      serviceAccountName: {{ .Values.serviceAccount }}
       containers:
         - name: prometheus
-          image: "{{ .Values.prometheus.image.repository }}:{{ .Values.prometheus.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
@@ -56,4 +56,4 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: {{ .Values.prometheus.storage.size }}
+            storage: {{ .Values.storage.size }}
